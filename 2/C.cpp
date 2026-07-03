@@ -13,15 +13,17 @@ int main()
     int n;
     cin>>n;
     
-    vector<int> nums1(n);
-    vector<int> nums2(n);
+    vector<int> nums1(n);//Left
+    vector<int> nums2(n);//Right
     for(int i=0;i<n;i++){
         cin>>nums1[i];
     }
     for(int i=0;i<n;i++){
         cin>>nums2[i];
     }
+
     
+
 
     return 0;
 }
