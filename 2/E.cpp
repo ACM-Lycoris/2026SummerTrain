@@ -15,22 +15,12 @@ int main()
 
     ll n;
     cin>>n;
-    string s;
-    cin>>s;
-    ll cntA=0,cntAK=0,cntAKJ=0,cntAKJs=0;
-    for(char c:s){
-        if(c=='A'){
-            cntA += 1;
-        } else if (c == 'K') {
-            cntAK += cntA;
-        } else if (c == 'J') {
-            cntAKJ += cntAK;
-        } else if (c == 'S') {
-            cntAKJs += cntAKJ;
-        }
+    vector<ll> nums(n);
+    for(int i=0;i<n;i++){
+        cin>>nums[i];
     }
-
-    cout<<cntAKJs<<endl;
-
+    
+    
+    
     return 0;
 }
