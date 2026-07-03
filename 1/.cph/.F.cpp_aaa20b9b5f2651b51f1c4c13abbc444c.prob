@@ -1,0 +1,1 @@
+{"name":"Local: F","url":"e:\\ACM\\Training\\2026Summer\\1\\F.cpp","tests":[{"id":1782957091949,"input":"2 1 1 1 8","output":"WWCRWWCR"},{"id":1782957110619,"input":"1 1 1 2 5","output":"CRWC"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ACM\\Training\\2026Summer\\1\\F.cpp","group":"local","local":true}
