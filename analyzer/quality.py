@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import re
 
+from analyzer.validity import _mask_comments_and_literals
+
 
 SEVERITY_ORDER = {"high": 0, "medium": 1, "low": 2}
 
@@ -28,6 +30,18 @@ def _finding(
         "message": message,
         "suggestion": suggestion,
     }
+
+
+def _matching_brace(text: str, opening: int) -> int | None:
+    depth = 0
+    for index in range(opening, len(text)):
+        if text[index] == "{":
+            depth += 1
+        elif text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+    return None
 
 
 def analyze_quality(text: str, path: str) -> list[dict[str, object]]:
@@ -62,22 +76,25 @@ def analyze_quality(text: str, path: str) -> list[dict[str, object]]:
                 )
             )
 
-    nested_loop = re.compile(
-        r"for\s*\([^)]*\b[ni]\w*\b[^)]*\)\s*\{[\s\S]{0,600}?"
-        r"(?P<inner>for\s*\([^)]*\b[mnj]\w*\b[^)]*\))",
-        re.IGNORECASE,
-    )
-    for match in nested_loop.finditer(text):
-        findings.append(
-            _finding(
-                "CPP003_NESTED_LOOP",
-                "medium",
-                path,
-                _line_number(text, match.start("inner")),
-                "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
-                "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。",
+    structural_text = _mask_comments_and_literals(text)
+    for outer in re.finditer(r"\bfor\s*\([^)]*\)\s*\{", structural_text):
+        opening = structural_text.find("{", outer.start(), outer.end())
+        closing = _matching_brace(structural_text, opening)
+        if closing is None:
+            continue
+        inner = re.search(r"\bfor\s*\(", structural_text[opening + 1 : closing])
+        if inner:
+            offset = opening + 1 + inner.start()
+            findings.append(
+                _finding(
+                    "CPP003_NESTED_LOOP",
+                    "medium",
+                    path,
+                    _line_number(text, offset),
+                    "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
+                    "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。",
+                )
             )
-        )
 
     function_match = re.search(r"\b(?:void|int|long\s+long|bool)\s+(DFS|dfs)\s*\([^)]*\)\s*\{", text)
     if function_match:

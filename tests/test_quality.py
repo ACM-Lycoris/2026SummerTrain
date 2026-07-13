@@ -24,6 +24,14 @@ class QualityTests(unittest.TestCase):
         result = by_rule(source)
         self.assertEqual(result["CPP003_NESTED_LOOP"]["line"], 2)
 
+    def test_does_not_flag_sequential_loops_as_nested(self):
+        source = (
+            "for(int i=0;i<n;i++){ read(a[i]); }\n"
+            "for(int i=0;i<n;i++){ sum += a[i]; }\n"
+        )
+
+        self.assertNotIn("CPP003_NESTED_LOOP", by_rule(source))
+
     def test_flags_recursive_dfs(self):
         source = "void DFS(int x){\n if(x) DFS(x-1);\n}\n"
         self.assertEqual(by_rule(source)["CPP004_RECURSIVE_DFS"]["line"], 2)

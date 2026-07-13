@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from analyzer.storage import analyze_with_cache, enrich_snapshot
+from analyzer.storage import ANALYSIS_VERSION, analyze_with_cache, enrich_snapshot
 
 
 class CacheTests(unittest.TestCase):
@@ -20,6 +20,7 @@ class CacheTests(unittest.TestCase):
                 "files": {
                     "1/A.cpp": {
                         "sha256": fingerprint,
+                        "analysis_version": ANALYSIS_VERSION,
                         "algorithm_tags": [{"tag": "Cached", "evidence": []}],
                         "quality_findings": [],
                     }
@@ -29,6 +30,30 @@ class CacheTests(unittest.TestCase):
             result = analyze_with_cache(record, root, cache)
 
             self.assertEqual(result["algorithm_tags"][0]["tag"], "Cached")
+
+    def test_old_analysis_version_recomputes_even_when_source_is_unchanged(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_path = root / "1" / "A.cpp"
+            source_path.parent.mkdir()
+            source_path.write_text("int main(){vector<int> dp(3); dp[1]=dp[0];}", encoding="utf-8")
+            fingerprint = hashlib.sha256(source_path.read_bytes()).hexdigest()
+            record = {"path": "1/A.cpp", "sha256": fingerprint, "valid_code": True}
+            cache = {
+                "files": {
+                    "1/A.cpp": {
+                        "sha256": fingerprint,
+                        "analysis_version": 0,
+                        "algorithm_tags": [{"tag": "Stale", "evidence": []}],
+                        "quality_findings": [],
+                    }
+                }
+            }
+
+            result = analyze_with_cache(record, root, cache)
+
+            self.assertEqual(result["algorithm_tags"][0]["tag"], "DP")
+            self.assertEqual(cache["files"]["1/A.cpp"]["analysis_version"], ANALYSIS_VERSION)
 
     def test_changed_fingerprint_recomputes_and_replaces_cache(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -14,6 +14,7 @@ from analyzer.scanner import scan_training_root
 
 
 EMPTY_OVERRIDES = {"schema_version": 1, "problems": {}, "sessions": {}}
+ANALYSIS_VERSION = 3
 
 
 def load_overrides(path: Path) -> dict:
@@ -91,7 +92,11 @@ def analyze_with_cache(file_record: dict, root: Path, cache: dict) -> dict:
     files_cache = cache.setdefault("files", {})
     relative_path = str(file_record["path"])
     cached = files_cache.get(relative_path)
-    if cached and cached.get("sha256") == file_record.get("sha256"):
+    if (
+        cached
+        and cached.get("sha256") == file_record.get("sha256")
+        and cached.get("analysis_version") == ANALYSIS_VERSION
+    ):
         return {
             "algorithm_tags": cached.get("algorithm_tags", []),
             "quality_findings": cached.get("quality_findings", []),
@@ -116,7 +121,11 @@ def analyze_with_cache(file_record: dict, root: Path, cache: dict) -> dict:
             "algorithm_tags": classify_algorithms(text),
             "quality_findings": analyze_quality(text, relative_path),
         }
-    files_cache[relative_path] = {"sha256": file_record.get("sha256"), **result}
+    files_cache[relative_path] = {
+        "sha256": file_record.get("sha256"),
+        "analysis_version": ANALYSIS_VERSION,
+        **result,
+    }
     return result
 
 

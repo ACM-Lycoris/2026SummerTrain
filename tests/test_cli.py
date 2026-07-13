@@ -12,6 +12,16 @@ SOLUTION = "int main(){int n; std::cin>>n; std::cout<<n; return 0;}\n"
 
 
 class CliTests(unittest.TestCase):
+    def test_daily_launcher_has_python_fallback_and_pause(self):
+        launcher = Path(__file__).resolve().parents[1] / "run-review.cmd"
+
+        content = launcher.read_text(encoding="utf-8")
+
+        self.assertIn("py -3 main.py", content)
+        self.assertIn("python main.py", content)
+        self.assertIn("pause", content.lower())
+        self.assertNotIn(" del ", content.lower())
+
     def test_scan_only_creates_database_and_cache_without_report(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

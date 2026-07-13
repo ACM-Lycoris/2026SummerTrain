@@ -53,7 +53,7 @@ def classify_algorithms(text: str) -> list[dict[str, object]]:
 
     if _has(text, r"\bstring\b") and _has(
         text,
-        r"\b(?:prefix\w*|kmp\w*|trie\w*|hash\w*|substr|find|reverse|char)\b|\.substr\s*\(",
+        r"\b(?:prefix\w*|kmp\w*|trie\w*|hash\w*|substr|find|reverse)\b|\.substr\s*\(",
     ):
         evidence["字符串"].append("字符串及匹配/变换操作")
 
@@ -66,11 +66,11 @@ def classify_algorithms(text: str) -> list[dict[str, object]]:
         if _has(text, pattern):
             evidence["数学"].append(label)
 
-    geometry_count = sum(
-        _has(text, pattern)
-        for pattern in (r"\bPoint\b", r"\b(?:cross|distance|dist)\b", r"\barea\b", r"\bd[xy]\b")
+    explicit_geometry = _has(text, r"\bPoint\b|\b(?:cross|polygon|convex_hull)\b")
+    area_with_coordinates = _has(text, r"\b\w*area\w*\b") and _has(
+        text, r"\bdx\b[\s\S]{0,200}\bdy\b|\bdy\b[\s\S]{0,200}\bdx\b"
     )
-    if geometry_count >= 2:
+    if explicit_geometry or area_with_coordinates:
         evidence["几何"].append("点、距离、叉积或面积计算")
 
     if _has(text, r"while\s*\(\s*\w+\s*<\s*\w+\s*\)") and _has(

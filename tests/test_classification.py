@@ -37,6 +37,17 @@ class ClassificationTests(unittest.TestCase):
         self.assertIn("字符串", string)
         self.assertIn("几何", geometry)
 
+    def test_grid_storage_is_not_misclassified_as_string_or_geometry(self):
+        source = (
+            "vector<vector<int>> dist(n, vector<int>(m)); "
+            "int dx[4], dy[4]; string row; cin>>row; char cell=row[0];"
+        )
+
+        result = tags(source)
+
+        self.assertNotIn("字符串", result)
+        self.assertNotIn("几何", result)
+
     def test_unrelated_program_is_unclassified(self):
         self.assertEqual(classify_algorithms("int main(){return 0;}"), [{"tag": "未分类", "evidence": []}])
 
