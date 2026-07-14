@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-13T11:02:09-04:00",
+  "generated_at": "2026-07-14T02:50:29-04:00",
   "training_root": ".",
   "sessions": [
     {
@@ -2939,7 +2939,7 @@
       "directory": "10",
       "date": "2026-07-13",
       "started_at": "2026-07-12T22:32:22-04:00",
-      "ended_at": "2026-07-13T09:13:48-04:00",
+      "ended_at": "2026-07-13T22:01:33-04:00",
       "problem_count": 8,
       "ac_count": 8,
       "attempted_count": 0,
@@ -2957,7 +2957,7 @@
               "filename": "B.cpp",
               "original_problem_id": "B",
               "problem_id": "B",
-              "modified_at": "2026-07-13T09:13:48-04:00",
+              "modified_at": "2026-07-13T22:01:33-04:00",
               "sha256": "b253d5196809623ff46e69ecf5f7dbd77c4d74e4e2ea1ec0772462371753b634",
               "line_count": 36,
               "code_line_count": 29,
@@ -3415,6 +3415,303 @@
               "severity": "medium",
               "path": "10/J.cpp",
               "line": 35,
+              "message": "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
+              "suggestion": "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。"
+            }
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "session_id": 11,
+      "directory": "11",
+      "date": "2026-07-14",
+      "started_at": "2026-07-13T22:08:26-04:00",
+      "ended_at": "2026-07-14T02:47:27-04:00",
+      "problem_count": 5,
+      "ac_count": 5,
+      "attempted_count": 0,
+      "problems": [
+        {
+          "problem_id": "A",
+          "status": "AC",
+          "source": "inferred",
+          "inferred_status": "AC",
+          "valid_code": true,
+          "files": [
+            {
+              "path": "11/A.cpp",
+              "session_id": 11,
+              "filename": "A.cpp",
+              "original_problem_id": "A",
+              "problem_id": "A",
+              "modified_at": "2026-07-14T02:47:27-04:00",
+              "sha256": "70547f8229b578beb558458965f73046794b14899a5a93f3982657c35340e0e1",
+              "line_count": 56,
+              "code_line_count": 43,
+              "valid_code": true,
+              "validity_reason": "substantive",
+              "algorithm_tags": [
+                {
+                  "tag": "贪心",
+                  "evidence": [
+                    "排序后进行局部选择或累计"
+                  ]
+                },
+                {
+                  "tag": "数据结构",
+                  "evidence": [
+                    "优先队列"
+                  ]
+                }
+              ],
+              "quality_findings": []
+            }
+          ],
+          "algorithm_tags": [
+            {
+              "tag": "贪心",
+              "evidence": [
+                "排序后进行局部选择或累计"
+              ]
+            },
+            {
+              "tag": "数据结构",
+              "evidence": [
+                "优先队列"
+              ]
+            }
+          ],
+          "quality_findings": []
+        },
+        {
+          "problem_id": "E",
+          "status": "AC",
+          "source": "inferred",
+          "inferred_status": "AC",
+          "valid_code": true,
+          "files": [
+            {
+              "path": "11/E.cpp",
+              "session_id": 11,
+              "filename": "E.cpp",
+              "original_problem_id": "E",
+              "problem_id": "E",
+              "modified_at": "2026-07-13T22:08:26-04:00",
+              "sha256": "a01914351014f01f317947b1ca7fd9df7b98f7b0b0fb5da4d4d093fd188cdc43",
+              "line_count": 43,
+              "code_line_count": 33,
+              "valid_code": true,
+              "validity_reason": "substantive",
+              "algorithm_tags": [
+                {
+                  "tag": "未分类",
+                  "evidence": []
+                }
+              ],
+              "quality_findings": []
+            }
+          ],
+          "algorithm_tags": [
+            {
+              "tag": "未分类",
+              "evidence": []
+            }
+          ],
+          "quality_findings": []
+        },
+        {
+          "problem_id": "F",
+          "status": "AC",
+          "source": "inferred",
+          "inferred_status": "AC",
+          "valid_code": true,
+          "files": [
+            {
+              "path": "11/F.cpp",
+              "session_id": 11,
+              "filename": "F.cpp",
+              "original_problem_id": "F",
+              "problem_id": "F",
+              "modified_at": "2026-07-13T22:12:00-04:00",
+              "sha256": "d8aaf62ae4e2e964466506ec6695415d7284d4f69fd8a47172c072ff83066532",
+              "line_count": 29,
+              "code_line_count": 22,
+              "valid_code": true,
+              "validity_reason": "substantive",
+              "algorithm_tags": [
+                {
+                  "tag": "未分类",
+                  "evidence": []
+                }
+              ],
+              "quality_findings": [
+                {
+                  "rule_id": "CPP003_NESTED_LOOP",
+                  "severity": "medium",
+                  "path": "11/F.cpp",
+                  "line": 19,
+                  "message": "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
+                  "suggestion": "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。"
+                }
+              ]
+            }
+          ],
+          "algorithm_tags": [
+            {
+              "tag": "未分类",
+              "evidence": []
+            }
+          ],
+          "quality_findings": [
+            {
+              "rule_id": "CPP003_NESTED_LOOP",
+              "severity": "medium",
+              "path": "11/F.cpp",
+              "line": 19,
+              "message": "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
+              "suggestion": "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。"
+            }
+          ]
+        },
+        {
+          "problem_id": "H",
+          "status": "AC",
+          "source": "inferred",
+          "inferred_status": "AC",
+          "valid_code": true,
+          "files": [
+            {
+              "path": "11/H.cpp",
+              "session_id": 11,
+              "filename": "H.cpp",
+              "original_problem_id": "H",
+              "problem_id": "H",
+              "modified_at": "2026-07-13T22:49:30-04:00",
+              "sha256": "1ee5ffe70d3e8ed6f418308c7c0c6437fd852c51c882915f89fd1f431ee98adf",
+              "line_count": 30,
+              "code_line_count": 22,
+              "valid_code": true,
+              "validity_reason": "substantive",
+              "algorithm_tags": [
+                {
+                  "tag": "未分类",
+                  "evidence": []
+                }
+              ],
+              "quality_findings": []
+            }
+          ],
+          "algorithm_tags": [
+            {
+              "tag": "未分类",
+              "evidence": []
+            }
+          ],
+          "quality_findings": []
+        },
+        {
+          "problem_id": "I",
+          "status": "AC",
+          "source": "inferred",
+          "inferred_status": "AC",
+          "valid_code": true,
+          "files": [
+            {
+              "path": "11/I.cpp",
+              "session_id": 11,
+              "filename": "I.cpp",
+              "original_problem_id": "I",
+              "problem_id": "I",
+              "modified_at": "2026-07-13T22:35:27-04:00",
+              "sha256": "db17a404cb99630a315e9788db29a7c7f2b83634d1ada82740df08375e0554c8",
+              "line_count": 57,
+              "code_line_count": 44,
+              "valid_code": true,
+              "validity_reason": "substantive",
+              "algorithm_tags": [
+                {
+                  "tag": "图论",
+                  "evidence": [
+                    "BFS/DFS 遍历",
+                    "队列式遍历",
+                    "邻接结构"
+                  ]
+                },
+                {
+                  "tag": "数据结构",
+                  "evidence": [
+                    "队列"
+                  ]
+                }
+              ],
+              "quality_findings": [
+                {
+                  "rule_id": "CPP001_FIXED_SUBSCRIPT",
+                  "severity": "medium",
+                  "path": "11/I.cpp",
+                  "line": 13,
+                  "message": "固定下标访问在容器较短时可能越界。",
+                  "suggestion": "访问前确认输入约束或显式检查容器长度。"
+                },
+                {
+                  "rule_id": "CPP001_FIXED_SUBSCRIPT",
+                  "severity": "medium",
+                  "path": "11/I.cpp",
+                  "line": 14,
+                  "message": "固定下标访问在容器较短时可能越界。",
+                  "suggestion": "访问前确认输入约束或显式检查容器长度。"
+                },
+                {
+                  "rule_id": "CPP003_NESTED_LOOP",
+                  "severity": "medium",
+                  "path": "11/I.cpp",
+                  "line": 48,
+                  "message": "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
+                  "suggestion": "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。"
+                }
+              ]
+            }
+          ],
+          "algorithm_tags": [
+            {
+              "tag": "图论",
+              "evidence": [
+                "BFS/DFS 遍历",
+                "队列式遍历",
+                "邻接结构"
+              ]
+            },
+            {
+              "tag": "数据结构",
+              "evidence": [
+                "队列"
+              ]
+            }
+          ],
+          "quality_findings": [
+            {
+              "rule_id": "CPP001_FIXED_SUBSCRIPT",
+              "severity": "medium",
+              "path": "11/I.cpp",
+              "line": 13,
+              "message": "固定下标访问在容器较短时可能越界。",
+              "suggestion": "访问前确认输入约束或显式检查容器长度。"
+            },
+            {
+              "rule_id": "CPP001_FIXED_SUBSCRIPT",
+              "severity": "medium",
+              "path": "11/I.cpp",
+              "line": 14,
+              "message": "固定下标访问在容器较短时可能越界。",
+              "suggestion": "访问前确认输入约束或显式检查容器长度。"
+            },
+            {
+              "rule_id": "CPP003_NESTED_LOOP",
+              "severity": "medium",
+              "path": "11/I.cpp",
+              "line": 48,
               "message": "嵌套循环可能形成 O(n²) 或 O(nm) 时间复杂度。",
               "suggestion": "结合最大输入规模核对操作次数，必要时改用预处理或更合适的数据结构。"
             }
