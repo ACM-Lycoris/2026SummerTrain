@@ -1,1 +1,0 @@
-{"name":"Local: C","url":"e:\\ACM\\Training\\2026Summer\\6\\C.cpp","tests":[{"id":1783483643495,"input":"3\n100 5\n233 10\n999 9","output":"11\n0\n28"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ACM\\Training\\2026Summer\\6\\C.cpp","group":"local","local":true}

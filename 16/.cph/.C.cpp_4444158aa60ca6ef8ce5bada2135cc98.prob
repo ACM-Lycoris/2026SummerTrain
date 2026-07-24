@@ -1,1 +1,0 @@
-{"name":"Local: C","url":"e:\\ACM\\Training\\2026Summer\\16\\C.cpp","tests":[{"id":1784521754580,"input":"3 1\nx y z\nx z","output":"xyz\nxzy\nyxz"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ACM\\Training\\2026Summer\\16\\C.cpp","group":"local","local":true}

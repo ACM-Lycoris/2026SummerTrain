@@ -1,2 +1,0 @@
-"""ACM training review analyzer."""
-
